@@ -6,6 +6,10 @@
 `node day-1/second.js`  
 and so on...
 
+## Run test
+
+`npm run test -- day-5/test.js`
+
 ## Solutions
 
 - 🎄 Day 01: [First](day-1/first.js) and [Second](day-1/second.js)
