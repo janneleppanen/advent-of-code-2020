@@ -1,4 +1,4 @@
-# My Advent of Code 2020 entries
+# Advent of Code 2020
 
 ## Running a task
 
@@ -20,10 +20,10 @@ and so on...
 
 ## Solutions
 
-- 🎄 Day 01: [First](day-1/index.js)
-- 🎄 Day 02: [First](day-2/index.js)
-- 🎄 Day 03: [First](day-3/index.js)
-- 🎄 Day 04: [First](day-4/index.js)
-- 🎄 Day 05: [First](day-5/index.js)
-- 🎄 Day 06: [First](day-6/index.js)
-- 🎄 Day 07: [First](day-7/index.js)
+- 🎄 [Solution for day 01](day-1/index.js)
+- 🎄 [Solution for day 02](day-2/index.js)
+- 🎄 [Solution for day 03](day-3/index.js)
+- 🎄 [Solution for day 04](day-4/index.js)
+- 🎄 [Solution for day 05](day-5/index.js)
+- 🎄 [Solution for day 06](day-6/index.js)
+- 🎄 [Solution for day 07](day-7/index.js)
