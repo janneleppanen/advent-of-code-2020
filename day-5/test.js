@@ -1,10 +1,12 @@
-const { expect } = require('@jest/globals');
-const firstCommands = require('./first');
+const { getSeatId } = require('./helpers');
 
-describe('Task 5:1', () => {
-  test('should work', () => {
-    expect(firstCommands.getSeatId('BFFFBBFRRR')).toBe(567);
-    expect(firstCommands.getSeatId('FFFBBBFRRR')).toBe(119);
-    expect(firstCommands.getSeatId('BBFFBBFRLL')).toBe(820);
+const MAX_ROWS = 127;
+const MAX_COLUMNS = 7;
+
+describe('Day 5', () => {
+  test('Part 1', () => {
+    expect(getSeatId('BFFFBBFRRR', MAX_ROWS, MAX_COLUMNS)).toBe(567);
+    expect(getSeatId('FFFBBBFRRR', MAX_ROWS, MAX_COLUMNS)).toBe(119);
+    expect(getSeatId('BBFFBBFRLL', MAX_ROWS, MAX_COLUMNS)).toBe(820);
   })
 })

@@ -1,4 +1,10 @@
 const fs = require('fs');
+const {
+  parsePassportData,
+  checkValidity,
+  checkValidityByRule
+} = require('./helpers')
+
 fs.readFile(`${__dirname}/input.txt`, 'utf-8', (error, input) => run(input))
 
 const requiredFields = {
@@ -33,36 +39,21 @@ const requiredFields = {
   },
 };
 
-const parsePassportData = (source) => {
-  const data = {};
-  source.replace('\n', ' ').split(' ').forEach(keypair => {
-    const [key, value] = keypair.split(':');
-    data[key] = value;
-  });
-  return data;
-}
-
-const checkValidity = (passport, requiredFields) => {
-  let isValid = true;
-  Object.keys(requiredFields).forEach(key => {
-    if (!passport.hasOwnProperty(key)) {
-      isValid = false;
-      return;
-    }
-    if (!requiredFields[key](passport[key])) {
-      isValid = false
-    }
-  });
-  return isValid;
-}
-
 const run = (input) => {
-  const rows = input.trim().split("\n\n").map(r => r.replace(/\n/g, ' '));
+  const rows = input
+    .trim()
+    .split("\n\n")
+    .map(r => r.replace(/\n/g, ' '));
 
-  const passports = rows.map(parsePassportData);
-  const validPassports = passports.filter(passport => {
-    return checkValidity(passport, requiredFields)
-  });
+  const validPassportsForPart1 = rows.map(parsePassportData)
+    .filter(passport => {
+      return checkValidity(passport, Object.keys(requiredFields))
+    });
+  console.log(`Day 04 - Part 1: ${validPassportsForPart1.length}`)
 
-  console.log(validPassports.length);
+  const validPassportsForPart2 = rows.map(parsePassportData)
+    .filter(passport => {
+      return checkValidityByRule(passport, requiredFields)
+    });
+  console.log(`Day 04 - Part 2: ${validPassportsForPart2.length}`)
 }

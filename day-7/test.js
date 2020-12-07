@@ -1,4 +1,3 @@
-const { expect } = require('@jest/globals');
 const {
   filterBagsContainingBag,
   parseBagRulesFromString,
@@ -6,8 +5,8 @@ const {
   getBagCountInsideBag
 } = require('./helpers');
 
-describe('Task 7', () => {
-  test('should give correct bags', () => {
+describe('Day 7', () => {
+  test('Part 1', () => {
     const input = `bright white bags contain 1 shiny gold bag.
 muted yellow bags contain 1 shiny gold bag, 2 other bags.
 dark orange bags contain 1 bright white bag, 1 muted yellow bag.
@@ -19,7 +18,7 @@ light red bags contain 1 bright white bag, 1 muted yellow bag.`;
     expect(uniqueBags.length).toBe(4);
   })
 
-  test('should contain correct amount', () => {
+  test('Part 2', () => {
     const input = `shiny gold bags contain 2 dark red bags.
 dark red bags contain 2 dark orange bags.
 dark orange bags contain 2 dark yellow bags.

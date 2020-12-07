@@ -15,8 +15,8 @@ const run = (input) => {
     })
     .reduce((sum, i) => {
       return sum + i.length
-    }, 0)
-  console.log(`Answer to first is ${firstAnswer}`)
+    }, 0);
+  console.log(`Day 06 - Part 1: ${firstAnswer}`)
 
   const secondAnswer = groups.map((group) => {
     const groupSize = group.split('\n').length;
@@ -40,6 +40,5 @@ const run = (input) => {
     return answerCountMap.yesToAll.length;
   })
   .reduce((sum, i) => sum + i, 0);
-
-  console.log(`Answer to first is ${secondAnswer}`)
+  console.log(`Day 06 - Part 2: ${secondAnswer}`);
 }
