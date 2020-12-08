@@ -1,12 +1,12 @@
 const isPasswordValidForPart1 = (min, max, lookForChar, password) => {
   let count = 0;
-  password.split('').forEach(char => {
+  password.split("").forEach((char) => {
     if (char === lookForChar) {
       count++;
     }
-  })
-  return count >= min && count <= max
-}
+  });
+  return count >= min && count <= max;
+};
 
 const isPasswordValidForPart2 = (index1, index2, lookForChar, password) => {
   let count = 0;
@@ -18,10 +18,10 @@ const isPasswordValidForPart2 = (index1, index2, lookForChar, password) => {
     count++;
   }
 
-  return count === 1
-}
+  return count === 1;
+};
 
 module.exports = {
   isPasswordValidForPart1,
-  isPasswordValidForPart2
-}
+  isPasswordValidForPart2,
+};
