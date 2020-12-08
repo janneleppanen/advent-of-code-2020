@@ -27,3 +27,4 @@ and so on...
 - 🎄 [Solution for day 05](day-5/index.js)
 - 🎄 [Solution for day 06](day-6/index.js)
 - 🎄 [Solution for day 07](day-7/index.js)
+- 🎄 [Solution for day 08](day-8/index.js)
