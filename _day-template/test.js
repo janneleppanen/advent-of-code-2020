@@ -1,13 +1,7 @@
-const {
-  fn
-} = require('./helpers');
+const { fn } = require("./helpers");
 
-describe('Day 0', () => {
-  test('Part 1', () => {
-    
-  })
+describe("Day 0", () => {
+  test("Part 1", () => {});
 
-  test('Part 2', () => {
-    
-  })
-})
+  test("Part 2", () => {});
+});
