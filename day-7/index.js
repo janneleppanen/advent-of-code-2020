@@ -1,4 +1,4 @@
-const fs = require('fs');
+const run = require('../utils/run');
 const {
   filterBagsContainingBag,
   parseBagRulesFromString,
@@ -6,9 +6,7 @@ const {
   getBagCountInsideBag
 } = require('./helpers')
 
-fs.readFile(`${__dirname}/input.txt`, 'utf-8', (error, input) => run(input))
-
-const run = (input) => {
+run(`${__dirname}/input.txt`, (input) => {
   const bagRules = parseBagRulesFromString(input);
   const bags = filterBagsContainingBag('shiny gold', bagRules);
   const uniqueBags = getUniqueBags(bags);
@@ -16,4 +14,4 @@ const run = (input) => {
   
   const bagCountIsideBag = getBagCountInsideBag('shiny gold', bagRules) - 1;
   console.log(`Day 07 - Part 2: ${bagCountIsideBag}`);
-}
+});

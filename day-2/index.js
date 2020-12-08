@@ -1,10 +1,10 @@
-const fs = require('fs');
+const run = require('../utils/run');
 const {
   isPasswordValidForPart1,
   isPasswordValidForPart2
 } = require('./helpers')
 
-fs.readFile(`${__dirname}/input.txt`, 'utf-8', (_, input) => {
+run(`${__dirname}/input.txt`, (input) => {
   const passwords = input.split('\n');
 
   const validForPart1 = passwords.filter(row => {
@@ -22,4 +22,4 @@ fs.readFile(`${__dirname}/input.txt`, 'utf-8', (_, input) => {
     return isPasswordValidForPart2(index1, index2, character, password);
   });
   console.log(`Day 02 - Part 2: ${validForPart2.length}`)
-})
+});

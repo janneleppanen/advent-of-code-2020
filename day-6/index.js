@@ -1,9 +1,6 @@
-const fs = require('fs');
-fs.readFile(`${__dirname}/input.txt`, 'utf-8', (error, input) => run(input))
+const run = require('../utils/run');
 
-
-
-const run = (input) => {
+run(`${__dirname}/input.txt`, (input) => {
   const groups = input.split('\n\n');
   
   const firstAnswer = groups
@@ -41,4 +38,4 @@ const run = (input) => {
   })
   .reduce((sum, i) => sum + i, 0);
   console.log(`Day 06 - Part 2: ${secondAnswer}`);
-}
+});

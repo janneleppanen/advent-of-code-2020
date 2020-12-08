@@ -1,11 +1,9 @@
-const fs = require('fs');
+const run = require('../utils/run');
 const {
   parsePassportData,
   checkValidity,
   checkValidityByRule
 } = require('./helpers')
-
-fs.readFile(`${__dirname}/input.txt`, 'utf-8', (error, input) => run(input))
 
 const requiredFields = {
   byr: (value) => {
@@ -39,7 +37,7 @@ const requiredFields = {
   },
 };
 
-const run = (input) => {
+run(`${__dirname}/input.txt`, (input) => {
   const rows = input
     .trim()
     .split("\n\n")
@@ -56,4 +54,4 @@ const run = (input) => {
       return checkValidityByRule(passport, requiredFields)
     });
   console.log(`Day 04 - Part 2: ${validPassportsForPart2.length}`)
-}
+});

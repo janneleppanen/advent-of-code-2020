@@ -1,7 +1,5 @@
-const fn = () => {
-
-}
+const fn = () => {};
 
 module.exports = {
-  fn
-}
+  fn,
+};

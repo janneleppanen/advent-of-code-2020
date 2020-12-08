@@ -1,11 +1,9 @@
-const fs = require('fs');
+const run = require('../utils/run');
 const {
   countTreesInSlope
 } = require('./helpers')
 
-fs.readFile(`${__dirname}/input.txt`, 'utf-8', (error, input) => run(input))
-
-const run = (input) => {
+run(`${__dirname}/input.txt`, (input) => {
   const makeSlopeMap = (input) => input.split('\n')
   const slopeMap = makeSlopeMap(input);
   const treeCount = countTreesInSlope(slopeMap, { x: 3, y: 1 })
@@ -21,4 +19,4 @@ const run = (input) => {
   const treeCounts = slides.map(dir => countTreesInSlope(slopeMap, dir));
   const multipliedTreeCount = treeCounts.reduce((sum, i) => sum * i, 1);
   console.log(`Day 03 - Part 2: ${multipliedTreeCount}`)
-}
+});
