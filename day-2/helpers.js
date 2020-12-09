@@ -1,4 +1,15 @@
-const isPasswordValidForPart1 = (min, max, lookForChar, password) => {
+const parsePasswords = (input) => input.split("\n");
+
+const getValidPasswords = (passwords, validator) => {
+  return passwords.filter((row) => {
+    const [range, characterLine, password] = row.split(" ");
+    const [min, max] = range.split("-").map((i) => parseInt(i));
+    const character = characterLine.replace(":", "");
+    return validator(min, max, character, password);
+  });
+};
+
+const part1Validator = (min, max, lookForChar, password) => {
   let count = 0;
   password.split("").forEach((char) => {
     if (char === lookForChar) {
@@ -8,7 +19,7 @@ const isPasswordValidForPart1 = (min, max, lookForChar, password) => {
   return count >= min && count <= max;
 };
 
-const isPasswordValidForPart2 = (index1, index2, lookForChar, password) => {
+const part2Validator = (index1, index2, lookForChar, password) => {
   let count = 0;
 
   if (password[index1 - 1] === lookForChar) {
@@ -22,6 +33,8 @@ const isPasswordValidForPart2 = (index1, index2, lookForChar, password) => {
 };
 
 module.exports = {
-  isPasswordValidForPart1,
-  isPasswordValidForPart2,
+  parsePasswords,
+  getValidPasswords,
+  part1Validator,
+  part2Validator,
 };

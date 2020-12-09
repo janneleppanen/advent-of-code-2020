@@ -1,25 +1,17 @@
 const run = require("../utils/run");
 const {
-  isPasswordValidForPart1,
-  isPasswordValidForPart2,
+  parsePasswords,
+  getValidPasswords,
+  part1Validator,
+  part2Validator,
 } = require("./helpers");
 
 run(`${__dirname}/input.txt`, (input) => {
-  const passwords = input.split("\n");
+  const passwords = parsePasswords(input);
 
-  const validForPart1 = passwords.filter((row) => {
-    const [range, characterLine, password] = row.split(" ");
-    const [min, max] = range.split("-").map((i) => parseInt(i));
-    const character = characterLine.replace(":", "");
-    return isPasswordValidForPart1(min, max, character, password);
-  });
+  const validForPart1 = getValidPasswords(passwords, part1Validator);
   console.log(`Day 02 - Part 1: ${validForPart1.length}`);
 
-  const validForPart2 = passwords.filter((row) => {
-    const [range, characterLine, password] = row.split(" ");
-    const [index1, index2] = range.split("-").map((i) => parseInt(i));
-    const character = characterLine.replace(":", "");
-    return isPasswordValidForPart2(index1, index2, character, password);
-  });
+  const validForPart2 = getValidPasswords(passwords, part2Validator);
   console.log(`Day 02 - Part 2: ${validForPart2.length}`);
 });
