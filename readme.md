@@ -29,3 +29,4 @@ and so on...
 - 🎄 [Solution for day 07](day-7/index.js)
 - 🎄 [Solution for day 08](day-8/index.js)
 - 🎄 [Solution for day 09](day-9/index.js)
+- 🎄 [Solution for day 10](day-10/index.js)
