@@ -69,4 +69,19 @@ describe("Day 10", () => {
       expect(diffOf3s).toBe(10);
     });
   });
+  describe("Part 2:", () => {
+    test("Input 1", () => {
+      const adapters = parseAdapters(input1);
+      adapters.unshift(0);
+      const variations = countVariations(adapters, 3);
+      expect(variations).toBe(8);
+    });
+
+    test("Input 2", () => {
+      const adapters = parseAdapters(input2);
+      adapters.unshift(0);
+      const variations = countVariations(adapters, 3);
+      expect(variations).toBe(19208);
+    });
+  });
 });

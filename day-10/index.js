@@ -1,5 +1,9 @@
 const run = require("../utils/run");
-const { parseAdapters, makeAdapterChain } = require("./helpers");
+const {
+  parseAdapters,
+  makeAdapterChain,
+  countVariations,
+} = require("./helpers");
 
 const MAX_DIFFERENCE = 3;
 
@@ -12,5 +16,8 @@ run(`${__dirname}/input.txt`, (input) => {
     .length;
   const magicNumber1 = countOneDiffAdapters * countThreeDiffAdapters;
   console.log(`Day 10 - Part 1: ${magicNumber1}`);
-  console.log(`Day 10 - Part 2: ${input.length}`);
+
+  adapters.unshift(0);
+  const variations = countVariations(adapters, 3);
+  console.log(`Day 10 - Part 2: ${variations}`);
 });

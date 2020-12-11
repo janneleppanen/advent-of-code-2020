@@ -26,7 +26,29 @@ const makeAdapterChain = (adapters, maxDiff) => {
   return chain;
 };
 
+let total = 0;
+const countVariations = (adapters, maxDiff, variations = 0) => {
+  adapters = adapters.sort((a, b) => a - b);
+  if (adapters.length === 1) {
+    total++;
+    if (total % 1000000 === 0) {
+      console.log(total.toLocaleString());
+    }
+    return 1;
+  }
+
+  const next = adapters[0];
+  for (let i = 1; i <= maxDiff; i++) {
+    if (adapters[i] - next <= maxDiff) {
+      variations += countVariations(adapters.slice(i), maxDiff, 0);
+    }
+  }
+
+  return variations;
+};
+
 module.exports = {
   parseAdapters,
   makeAdapterChain,
+  countVariations,
 };
