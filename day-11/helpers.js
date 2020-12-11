@@ -1,28 +1,25 @@
 const parseArea = (input) => input.split(`\n`).map((i) => i.split(""));
 
-const simulateArea = (area) => {
+const simulateArea = (area, rules) => {
   return area.map((row, y) => {
     return row.map((slot, x) => {
-      return simulateSlot({ slot, x, y, area });
+      const position = { x, y };
+      return simulateSlot({ slot, position, area, rules });
     });
   });
 };
 
-const simulateSlot = ({ slot, x, y, area }) => {
-  if (slot === "L") {
-    // getAdjecent === 0 -> #
-    return getAdjecentOccupationCount({ x, y, area }) === 0 ? "#" : slot;
-  }
-
-  if (slot === "#") {
-    // getAdjecent >= 4 -> L
-    return getAdjecentOccupationCount({ x, y, area }) >= 4 ? "L" : slot;
+const simulateSlot = ({ slot, position, area, rules }) => {
+  for (rule in rules) {
+    if (slot === rule) {
+      return rules[rule]({ slot, position, area });
+    }
   }
 
   return slot;
 };
 
-const getAdjecentOccupationCount = ({ x, y, area }) => {
+const getAdjecentOccupationCount = ({ x, y }, area) => {
   const checks = [
     { y: y - 1, x: x - 1 },
     { y: y - 1, x: x },
@@ -58,10 +55,34 @@ const countOccupiedInArea = (area) => {
     .filter((slot) => slot === "#").length;
 };
 
+const getOccupationCountInDirections = ({ directions, position, area }) => {
+  const stop = [undefined, "#", "L"];
+
+  const a = directions
+    .map((direction) => {
+      let x = position.x + direction.x;
+      let y = position.y + direction.y;
+
+      while (area[y] !== undefined && !stop.includes(area[y][x])) {
+        x += direction.x;
+        y += direction.y;
+      }
+      if (area[y] === undefined) return undefined;
+
+      return area[y][x];
+    })
+    .filter((i) => i === "#");
+
+  return a.length;
+};
+
 module.exports = {
   parseArea,
   simulateArea,
   areAreasEqual,
   cloneArea,
+  stringifyArea,
+  getAdjecentOccupationCount,
   countOccupiedInArea,
+  getOccupationCountInDirections,
 };
