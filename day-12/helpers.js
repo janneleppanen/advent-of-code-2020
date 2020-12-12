@@ -18,10 +18,10 @@ const moveShipWithCommands = (ship, commands) => {
       case "S":
       case "E":
       case "W":
-        ship = moveShip(ship, Direction[action], value);
+        ship = moveOject(ship, Direction[action], value);
         break;
       case "F":
-        ship = moveShip(ship, ship.direction, value);
+        ship = moveOject(ship, ship.direction, value);
         break;
       case "R":
       case "L":
@@ -33,7 +33,7 @@ const moveShipWithCommands = (ship, commands) => {
   return ship;
 };
 
-const moveShip = (ship, direction, value) => {
+const moveOject = (ship, direction, value) => {
   return {
     ...ship,
     x: ship.x + direction.x * value,
@@ -65,10 +65,57 @@ const turnShip = (ship, turnTo, value) => {
   return { ...ship, direction: newDirection };
 };
 
+const moveShipAndWaypointWithCommands = (ship, waypoint, commands) => {
+  commands.forEach(({ action, value }) => {
+    switch (action) {
+      case "N":
+      case "S":
+      case "E":
+      case "W":
+        waypoint = moveOject(waypoint, Direction[action], value);
+        break;
+      case "F":
+        ship = moveOject(ship, waypoint, value);
+        break;
+      case "R":
+      case "L":
+        waypoint = rotateWaypoint(waypoint, action, value);
+        break;
+    }
+  });
+
+  return { ship, waypoint };
+};
+
+const rotateWaypoint = (waypoint, rotateTo, value) => {
+  const times = value / 90;
+  let newPosition = { ...waypoint };
+
+  for (let i = 0; i < times; i++) {
+    switch (rotateTo) {
+      case "R":
+        newPosition = {
+          x: parseInt(newPosition.y),
+          y: parseInt(newPosition.x * -1),
+        };
+        break;
+      case "L":
+        newPosition = {
+          x: parseInt(newPosition.y * -1),
+          y: parseInt(newPosition.x),
+        };
+        break;
+    }
+  }
+
+  return newPosition;
+};
+
 module.exports = {
   parseCommands,
   Direction,
-  moveShip,
+  moveOject,
   turnShip,
   moveShipWithCommands,
+  moveShipAndWaypointWithCommands,
 };

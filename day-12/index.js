@@ -1,5 +1,10 @@
 const run = require("../utils/run");
-const { Direction, parseCommands, moveShipWithCommands } = require("./helpers");
+const {
+  Direction,
+  parseCommands,
+  moveShipWithCommands,
+  moveShipAndWaypointWithCommands,
+} = require("./helpers");
 
 run(`${__dirname}/input.txt`, (input) => {
   const commands = parseCommands(input);
@@ -7,5 +12,13 @@ run(`${__dirname}/input.txt`, (input) => {
   const { x, y } = moveShipWithCommands(ship, commands);
   const magicValuePart1 = Math.abs(x) + Math.abs(y);
   console.log(`Day 12 - Part 1: ${magicValuePart1}`);
-  console.log(`Day 12 - Part 2: ${input.length}`);
+
+  const waypoint = { x: 10, y: 1 };
+  const { ship: movedShip } = moveShipAndWaypointWithCommands(
+    ship,
+    waypoint,
+    commands
+  );
+  const magicValuePart2 = Math.abs(movedShip.x) + Math.abs(movedShip.y);
+  console.log(`Day 12 - Part 2: ${magicValuePart2}`);
 });

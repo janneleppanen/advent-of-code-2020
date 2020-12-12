@@ -3,7 +3,8 @@ const {
   parseCommands,
   Direction,
   moveShipWithCommands,
-  moveShip,
+  moveShipAndWaypointWithCommands,
+  moveOject,
   turnShip,
 } = require("./helpers");
 
@@ -17,12 +18,12 @@ describe("Day 12", () => {
   test("Part 1 : actions", () => {
     const ship = { direction: { x: 1, y: 0 }, x: 0, y: 0 };
 
-    expect(moveShip(ship, ship.direction, 10).x).toBe(10);
+    expect(moveOject(ship, ship.direction, 10).x).toBe(10);
 
-    expect(moveShip(ship, Direction.S, 20).y).toBe(-20);
-    expect(moveShip(ship, Direction.N, 30).y).toBe(30);
-    expect(moveShip(ship, Direction.W, 40).x).toBe(-40);
-    expect(moveShip(ship, Direction.E, 50).x).toBe(50);
+    expect(moveOject(ship, Direction.S, 20).y).toBe(-20);
+    expect(moveOject(ship, Direction.N, 30).y).toBe(30);
+    expect(moveOject(ship, Direction.W, 40).x).toBe(-40);
+    expect(moveOject(ship, Direction.E, 50).x).toBe(50);
 
     // { x: 1, y: 0 } => { x: 0, y: -1 }
     expect(turnShip(ship, "R", 90).direction.x).toBe(0);
@@ -61,5 +62,17 @@ describe("Day 12", () => {
     expect(Math.abs(x)).toBe(17);
   });
 
-  test("Part 2", () => {});
+  test("Part 2", () => {
+    const commands = parseCommands(input);
+    const ship = { x: 0, y: 0 };
+    const waypoint = { x: 10, y: 1 };
+    const { ship: movedShip } = moveShipAndWaypointWithCommands(
+      ship,
+      waypoint,
+      commands
+    );
+
+    expect(Math.abs(movedShip.x)).toBe(214);
+    expect(Math.abs(movedShip.y)).toBe(72);
+  });
 });
