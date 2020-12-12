@@ -2,7 +2,7 @@ const run = require("../utils/run");
 const {
   parseAdapters,
   makeAdapterChain,
-  countVariations,
+  countVariationsWithCache,
 } = require("./helpers");
 
 const MAX_DIFFERENCE = 3;
@@ -18,6 +18,6 @@ run(`${__dirname}/input.txt`, (input) => {
   console.log(`Day 10 - Part 1: ${magicNumber1}`);
 
   adapters.unshift(0);
-  const variations = countVariations(adapters, 3);
+  const variations = countVariationsWithCache(adapters, 3);
   console.log(`Day 10 - Part 2: ${variations}`);
 });

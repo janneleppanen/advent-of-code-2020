@@ -26,21 +26,42 @@ const makeAdapterChain = (adapters, maxDiff) => {
   return chain;
 };
 
-let total = 0;
-const countVariations = (adapters, maxDiff, variations = 0) => {
+const countVariationsWithCache = (adapters, maxDiff) => {
+  const variationsMap = {};
+  adapters = adapters.sort((a, b) => b - a);
+  adapters.forEach((adapter, index) => {
+    const set = adapters.slice(0, index + 1);
+    variationsMap[adapter] = countVariations(set, maxDiff, 0, variationsMap);
+    const variations = variationsMap[adapter];
+  });
+
+  return variationsMap["0"];
+};
+
+const countVariations = (
+  adapters,
+  maxDiff,
+  variations = 0,
+  variationsMap = {}
+) => {
   adapters = adapters.sort((a, b) => a - b);
   if (adapters.length === 1) {
-    total++;
-    if (total % 1000000 === 0) {
-      console.log(total.toLocaleString());
-    }
     return 1;
+  }
+
+  if (Object.keys(variationsMap).includes(adapters[0].toString())) {
+    return variationsMap[adapters[0]];
   }
 
   const next = adapters[0];
   for (let i = 1; i <= maxDiff; i++) {
     if (adapters[i] - next <= maxDiff) {
-      variations += countVariations(adapters.slice(i), maxDiff, 0);
+      variations += countVariations(
+        adapters.slice(i),
+        maxDiff,
+        0,
+        variationsMap
+      );
     }
   }
 
@@ -51,4 +72,5 @@ module.exports = {
   parseAdapters,
   makeAdapterChain,
   countVariations,
+  countVariationsWithCache,
 };

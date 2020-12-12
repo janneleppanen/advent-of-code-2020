@@ -1,8 +1,8 @@
 const {
   parseAdapters,
   makeAdapterChain,
-  makeDistinctArrangements,
   countVariations,
+  countVariationsWithCache,
 } = require("./helpers");
 
 const input1 = `16
@@ -77,10 +77,24 @@ describe("Day 10", () => {
       expect(variations).toBe(8);
     });
 
-    test("Input 2", () => {
+    test("Input 2 : slow", () => {
       const adapters = parseAdapters(input2);
       adapters.unshift(0);
       const variations = countVariations(adapters, 3);
+      expect(variations).toBe(19208);
+    });
+
+    test("Input 1 : fast", () => {
+      const adapters = parseAdapters(input1);
+      adapters.unshift(0);
+      const variations = countVariationsWithCache(adapters, 3);
+      expect(variations).toBe(8);
+    });
+
+    test("Input 2 : fast", () => {
+      const adapters = parseAdapters(input2);
+      adapters.unshift(0);
+      const variations = countVariationsWithCache(adapters, 3);
       expect(variations).toBe(19208);
     });
   });
