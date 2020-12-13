@@ -32,3 +32,4 @@ and so on...
 - 🎄 [Solution for day 10](day-10/index.js)
 - 🎄 [Solution for day 11](day-11/index.js)
 - 🎄 [Solution for day 12](day-12/index.js)
+- 🎄 [Solution for day 13](day-13/index.js)
